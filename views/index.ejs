@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台灣地理知識問答遊戲</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .question-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .option {
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        .option:hover {
+            transform: translateY(-2px);
+        }
+        .progress {
+            height: 10px;
+            margin-bottom: 2rem;
+        }
+        .score-display {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question-container">
+            <h1 class="text-center mb-4">台灣知識問答遊戲</h1>
+            
+            <div class="progress">
+                <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%"></div>
+            </div>
+
+            <div class="score-display">
+                <span class="badge bg-primary">題數: <span id="question-number">0</span>/<span id="total-questions">0</span></span>
+                <span class="badge bg-success">答對: <span id="correct-count">0</span></span>
+                <span class="badge bg-danger">答錯: <span id="wrong-count">0</span></span>
+            </div>
+
+            <div id="question-display" class="mb-4">
+                <!-- 問題會在這裡顯示 -->
+            </div>
+            <div id="options" class="d-grid gap-3">
+                <!-- 選項會在這裡顯示 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // 初始化遊戲狀態
+        const gameState = {
+            questions: <%- JSON.stringify(questions || []) %>,
+            currentIndex: 0,
+            correctCount: 0,
+            wrongCount: 0
+        };
+
+        function updateProgress() {
+            const progress = ((gameState.currentIndex + 1) / gameState.questions.length) * 100;
+            document.getElementById('progress-bar').style.width = `${progress}%`;
+            document.getElementById('question-number').textContent = gameState.currentIndex + 1;
+            document.getElementById('total-questions').textContent = gameState.questions.length;
+            document.getElementById('correct-count').textContent = gameState.correctCount;
+            document.getElementById('wrong-count').textContent = gameState.wrongCount;
+        }
+
+        function showQuestion(index) {
+            if (!gameState.questions || gameState.questions.length === 0) {
+                document.getElementById('question-display').innerHTML = `
+                    <div class="alert alert-warning" role="alert">
+                        目前沒有可用的問題
+                    </div>`;
+                return;
+            }
+
+            const question = gameState.questions[index];
+            document.getElementById('question-display').innerHTML = `
+                <h2 class="text-center mb-4">${question.item}</h2>
+            `;
+
+            const allOptions = [question.correct, ...question.wrong];
+            const shuffledOptions = shuffleArray(allOptions);
+
+            const optionsHtml = shuffledOptions.map(option => `
+                <button class="btn btn-outline-primary option" onclick="checkAnswer('${option}', '${question.correct}')">
+                    ${option}
+                </button>
+            `).join('');
+
+            document.getElementById('options').innerHTML = optionsHtml;
+            updateProgress();
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function checkAnswer(selected, correct) {
+            const isCorrect = selected === correct;
+            
+            if (isCorrect) {
+                gameState.correctCount++;
+                showToast('答對了！', 'success');
+            } else {
+                gameState.wrongCount++;
+                showToast(`答錯了！正確答案是：${correct}`, 'danger');
+            }
+            
+            if (gameState.currentIndex < gameState.questions.length - 1) {
+                gameState.currentIndex++;
+                setTimeout(() => showQuestion(gameState.currentIndex), 1000);
+            } else {
+                showGameOver();
+            }
+        }
+
+        function showToast(message, type) {
+            const toastContainer = document.createElement('div');
+            toastContainer.style.position = 'fixed';
+            toastContainer.style.top = '20px';
+            toastContainer.style.right = '20px';
+            toastContainer.style.zIndex = '1050';
+            
+            toastContainer.innerHTML = `
+                <div class="toast align-items-center text-white bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(toastContainer);
+            const toastElement = new bootstrap.Toast(toastContainer.querySelector('.toast'));
+            toastElement.show();
+            
+            setTimeout(() => {
+                toastContainer.remove();
+            }, 3000);
+        }
+
+        function showGameOver() {
+            const accuracy = ((gameState.correctCount / gameState.questions.length) * 100).toFixed(1);
+            document.getElementById('question-display').innerHTML = `
+                <div class="text-center">
+                    <h2 class="mb-4">遊戲結束！</h2>
+                    <div class="alert alert-info">
+                        <p>總題數: ${gameState.questions.length}</p>
+                        <p>答對: ${gameState.correctCount}</p>
+                        <p>答錯: ${gameState.wrongCount}</p>
+                        <p>正確率: ${accuracy}%</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="restartGame()">重新開始</button>
+                </div>
+            `;
+            document.getElementById('options').innerHTML = '';
+        }
+
+        function restartGame() {
+            gameState.currentIndex = 0;
+            gameState.correctCount = 0;
+            gameState.wrongCount = 0;
+            gameState.questions = shuffleArray([...gameState.questions]);
+            showQuestion(0);
+        }
+
+        // 當頁面載入時開始遊戲
+        window.onload = () => {
+            gameState.questions = shuffleArray([...gameState.questions]);
+            showQuestion(0);
+        };
+    </script>
+</body>
+</html>

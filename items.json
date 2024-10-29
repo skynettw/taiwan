@@ -1,0 +1,182 @@
+[
+    {
+        "item": "台灣唯一個不靠海的縣是哪一個",
+        "correct": "南投",
+        "wrong": [
+            "台南",
+            "雲林"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣最高的山是哪座",
+        "correct": "玉山",
+        "wrong": [
+            "阿里山",
+            "合歡山"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣最長的河川是什麼",
+        "correct": "濁水溪",
+        "wrong": [
+            "淡水河",
+            "愛河"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣的國家公園數量有幾個",
+        "correct": "9",
+        "wrong": [
+            "5",
+            "12"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "以下哪個城市以阿里山著名",
+        "correct": "嘉義",
+        "wrong": [
+            "台中",
+            "新竹"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣最大的湖泊是哪一個",
+        "correct": "日月潭",
+        "wrong": [
+            "澎湖湖",
+            "石門水庫"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣的東部主要是哪一片海洋",
+        "correct": "太平洋",
+        "wrong": [
+            "印度洋",
+            "大西洋"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣北端的燈塔在哪裡",
+        "correct": "富貴角",
+        "wrong": [
+            "鵝鑾鼻",
+            "三貂角"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣的首都是哪裡",
+        "correct": "台北",
+        "wrong": [
+            "台中",
+            "高雄"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "蘭嶼主要是哪個原住民族的居住地",
+        "correct": "達悟族",
+        "wrong": [
+            "阿美族",
+            "布農族"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣面積最大的縣是哪一個",
+        "correct": "花蓮縣",
+        "wrong": [
+            "屏東縣",
+            "南投縣"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣知名的石門水庫位於哪個縣市",
+        "correct": "新北市",
+        "wrong": [
+            "台中市",
+            "嘉義縣"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "澎湖群島位於台灣的哪個方向",
+        "correct": "西方",
+        "wrong": [
+            "東方",
+            "南方"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "以下哪一個是台灣的熱帶水果",
+        "correct": "鳳梨",
+        "wrong": [
+            "蘋果",
+            "葡萄"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣東部的花蓮縣隔著什麼海峽與其他國家相望",
+        "correct": "菲律賓海峽",
+        "wrong": [
+            "台灣海峽",
+            "對馬海峽"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣最南端的地點是哪裡",
+        "correct": "鵝鑾鼻",
+        "wrong": [
+            "墾丁",
+            "七星潭"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣海岸線最長的縣是哪一個",
+        "correct": "台東縣",
+        "wrong": [
+            "基隆市",
+            "台南市"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣最大的珊瑚礁在哪裡",
+        "correct": "墾丁",
+        "wrong": [
+            "基隆",
+            "澎湖"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣的中橫公路連接哪兩個縣市",
+        "correct": "台中與花蓮",
+        "wrong": [
+            "南投與嘉義",
+            "宜蘭與台北"
+        ],
+        "category": "taiwan"
+    },
+    {
+        "item": "台灣本島面積的排名是世界第幾",
+        "correct": "38",
+        "wrong": [
+            "24",
+            "42"
+        ],
+        "category": "taiwan"
+    }
+]
